@@ -1,7 +1,12 @@
 {
-  "format":2,
+  "format": 2,
   "compileOptions": {
     "less": true,
     "typescript": true
-  }
+  },
+  "uploadExclude": [
+    "node_modules",
+    ".idea",
+    "*.md"
+  ]
 }
