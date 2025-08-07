@@ -1,0 +1,165 @@
+
+<view class="container">
+
+    <view class="header-section">
+        <view class="avatar-wrapper">
+            <image class="avatar" src="https://mirrorchyan.com/api/misc/static/mirrorc/avatar-256.png"
+                   mode="aspectFill"></image>
+        </view>
+        <view class="title-wrapper">
+            <text class="main-title">Mirror酱</text>
+        </view>
+    </view>
+
+
+    <view class="cards-section">
+
+        <view class="function-card" onTap="onFetchCdkList">
+            <view class="card-icon-wrapper">
+                <view class="card-icon">
+                    <image src="/images/cdk.svg"></image>
+                </view>
+            </view>
+            <view class="card-content">
+                <text class="card-title">快捷查询</text>
+                <text class="card-desc">一键查询支付宝的CDK</text>
+            </view>
+            <view class="card-arrow">➔</view>
+        </view>
+
+
+        <view class="function-card" onTap="onQueryCDK">
+            <view class="card-icon-wrapper">
+                <view class="card-icon">
+                    <image src="/images/order.svg"></image>
+                </view>
+            </view>
+            <view class="card-content">
+                <text class="card-title">更多查询</text>
+                <text class="card-desc">手动查询更多平台的CDK</text>
+            </view>
+            <view class="card-arrow">➔</view>
+        </view>
+
+
+        <view class="function-card" onTap="onFeedback">
+            <view class="card-icon-wrapper">
+                <view class="card-icon">
+                    <image src="/images/feedback.svg"></image>
+                </view>
+            </view>
+            <view class="card-content">
+                <text class="card-title">交流反馈</text>
+                <text class="card-desc">加入QQ群获取帮助</text>
+            </view>
+            <view class="card-arrow">➔</view>
+        </view>
+    </view>
+
+
+    <!-- 订单弹窗 -->
+    <view class="popup-overlay order-popup {{showOrderList ? 'show' : 'hide'}}" onTap="closeOrderList">
+        <view class="modern-order-popup" onTap="preventDefault">
+
+            <view class="order-popup-header">
+                <view class="header-icon-area">
+                    <text class="header-icon"> </text>
+                </view>
+                <text class="order-popup-title">我的CDK</text>
+                <view class="order-close-btn" onTap="closeOrderList">
+                    <text class="close-icon">✕</text>
+                </view>
+            </view>
+
+
+            <view class="order-popup-body">
+                <view a:if="{{orderList.length === 0}}" class="empty-state">
+                    <view class="empty-icon">
+                        <text class="empty-icon-text">📦</text>
+                    </view>
+                    <text class="empty-title">暂无订单</text>
+                    <text class="empty-desc">未查询到CDK，可尝试手动输入订单号查询~</text>
+                </view>
+                <scroll-view a:else class="order-list-scroll" scroll-y="{{true}}"
+                             enable-flex="{{true}}" scroll-with-animation="{{true}}">
+                    <view class="order-list">
+                        <view a:for="{{orderList}}" a:key="cdk"
+                              class="order-card {{item.status === 'expired' ? 'order-card-expired' : ''}}">
+
+                            <view class="order-card-header">
+                                <view class="cdk-info">
+                                    <view class="cdk-display-row {{item.status ==='valid'?'':'cdk-display-row-expired'}}">
+                                        <text class="cdk-code {{item.status ==='valid'?'':'cdk-code-expired'}}">{{item.cdk}}</text>
+                                        <view class="cdk-status-badge {{item.status ==='valid'?'status-valid':'status-expired'}}">
+                                            {{item.status === 'valid' ? '有效' : (item.status === 'transferred' ? '已被转移' : '已过期')}}
+                                        </view>
+                                    </view>
+                                    <view class="cdk-display-row {{item.status!=='expired'?'':'cdk-display-row-expired'}}">
+                                        <view class="{{item.status === 'valid' ? '' : 'cdk-time-expired'}}">
+                                            {{ (item.status === 'transferred' ? '转移时间：' : '过期时间：') + item.expiredFormatStr }}
+                                        </view>
+                                    </view>
+                                    <button
+                                            type="{{item.status === 'valid' ? 'primary' : 'default'}}"
+                                            size="mini"
+                                            data-cdk="{{item.cdk}}"
+                                            onTap="copyCDK"
+                                            class="copy-btn"
+                                    >
+                                        复制
+                                    </button>
+                                </view>
+                            </view>
+
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 反馈弹窗 -->
+    <view class="popup-overlay feedback-popup {{showFeedback ? 'show' : 'hide'}}" onTap="closeFeedback">
+        <view class="modern-feedback-popup" onTap="preventDefault">
+
+            <view class="feedback-popup-header">
+                <view class="feedback-icon-area">
+                    <text class="feedback-icon">💬</text>
+                </view>
+                <text class="feedback-popup-title">问题反馈</text>
+                <view class="feedback-close-btn" onTap="closeFeedback">
+                    <text class="close-icon">✕</text>
+                </view>
+            </view>
+
+
+            <view class="feedback-popup-body">
+                <view class="feedback-intro">
+                    <view class="intro-icon">
+                        <text class="intro-icon-text">🛠️</text>
+                    </view>
+                    <text class="intro-desc">如遇问题，欢迎加入QQ群反馈</text>
+                </view>
+
+                <view class="qq-info-card">
+                    <view class="qq-header">
+                        <text class="qq-title">QQ售后群</text>
+                    </view>
+                    <view class="qq-divider"></view>
+                    <view class="qq-content">
+                        <view class="qq-number-display">
+                            <text class="qq-number-text">{{qqGroupNumber}}</text>
+                        </view>
+                        <button
+                                type="primary"
+                                onTap="copyQQ"
+                                class="copy-qq-btn"
+                        >
+                             复制
+                        </button>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

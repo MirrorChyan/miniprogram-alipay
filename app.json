@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/get-key/get-key"
+  ],
+  "lazyCodeLoading": "renderedComponents",
+  "window": {
+    "defaultTitle": "Mirror酱",
+    "transparentTitle": "none",
+    "titlePenetrate": "NO"
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  }
+}
