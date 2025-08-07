@@ -2,11 +2,15 @@
   "format": 2,
   "compileOptions": {
     "less": true,
-    "typescript": true
+    "typescript": true,
+    "component2": true
   },
   "uploadExclude": [
-    "node_modules",
     ".idea",
-    "*.md"
-  ]
+    "*.md",
+    "/**/.DS_Store"
+  ],
+  "developOptions": {
+    "skipTranspile": false
+  }
 }
