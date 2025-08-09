@@ -39,6 +39,14 @@
             </view>
             <view class="tips-divider"></view>
             <view class="tips-list">
+                     <view class="tip-item">
+                                <text class="tip-title">支付宝-米诺斯工作室</text>
+                                <text class="tip-desc">商家订单号（ALN开头）</text>
+                            </view>
+                            <view class="tip-item">
+                                <text class="tip-title">支付宝-云卬数据</text>
+                                <text class="tip-desc">商品说明号（客服QQ前面的部分）</text>
+                            </view>
                 <view class="tip-item">
                     <text class="tip-title">微信-米诺斯工作室</text>
                     <text class="tip-desc">商户单号（WeN开头）</text>
@@ -47,14 +55,7 @@
                     <text class="tip-title">微信-云卬数据</text>
                     <text class="tip-desc">商品号（客服QQ前面的部分）</text>
                 </view>
-                <view class="tip-item">
-                    <text class="tip-title">支付宝-米诺斯工作室</text>
-                    <text class="tip-desc">商家订单号（ALN开头）</text>
-                </view>
-                <view class="tip-item">
-                    <text class="tip-title">支付宝-云卬数据</text>
-                    <text class="tip-desc">商品说明号（客服QQ前面的部分）</text>
-                </view>
+
                 <view class="tip-item">
                     <text class="tip-title">爱发电</text>
                     <text class="tip-desc">订单号</text>

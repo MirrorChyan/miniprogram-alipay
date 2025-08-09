@@ -23,14 +23,15 @@ Page({
   },
 
   onLoad() {
-    this.getOpenId()
+    // this.getOpenId()
   },
 
   async getOpenId() {
     try {
       const result = await my.getAuthCode({
-        scopes: ['auth_user']
+        scopes: ['auth_base']
       })
+
       if (result.authCode) {
         const resp = await getOpenId(result.authCode);
         if (resp.data?.data?.openid) {
